@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<voicemail xmlns="http://www.innovaphone.com/xsd/voicemail6.xsd">
+  <function define="Main">
+	  <pbx-getcallinfo out-leg2="$leg2"/>
+	  <if cond="$leg2">
+		  <store-get root="" name="announcement.g711a" out-url="$url"/>
+		  <pbx-prompt url="$url" barge-in="false"/>
+		  <pbx-disc/>
+	  </if>
+	  <else>
+		  <store-get root="" name="en_please_speak_after_the_signal.g711a" out-url="$url" />
+		  <pbx-prompt url="$url" barge-in="false"/>
+		  <store-get root="" name="beep.g711a" out-url="$url" />
+		  <pbx-prompt url="$url" />
+		  <store-get root="" name="announcement.g711a" out-url="$url"/>
+		  <pbx-record url="$url"/>
+	  </else>
+  </function>
+</voicemail>
+
+<!-- Simple caller notification wiki-src/xml/notify 1,0,0,0 (C) innovaphone AG 2010-2010 -->
